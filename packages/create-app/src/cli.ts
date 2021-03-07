@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { create } from "create-initializer";
-import { resolve } from "path";
+import { resolve, join } from "path";
+import { renameSync } from "fs";
 
 const templateRoot = resolve(__dirname, "..", "templates");
 
@@ -12,4 +13,7 @@ const caveat = `Welcome to Enx Empire`;
 create("create-app", {
     templateRoot,
     caveat,
+    after: ({ packageDir }) => {
+        renameSync(join(packageDir, "_gitignore"), join(packageDir, ".gitignore"));
+    },
 });
