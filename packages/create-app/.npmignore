@@ -11,5 +11,5 @@ config.gypi
 CVS
 npm-debug.log
 
-!templates/default/.gitignore
-templates/default/node_modules
+!.gitignore
+node_modules

@@ -1,7 +1,7 @@
 {
     "name": "@enx2/create-app",
     "description": "Enx app template",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "author": "Jean-François Pustay <jef97310@gmail.com>",
     "repository": {
         "type": "git",
