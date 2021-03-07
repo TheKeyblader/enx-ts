@@ -8,7 +8,7 @@ export default function Layout(props: React.PropsWithChildren<{}>) {
         <DarkContainer>
             <Header />
             <Nav />
-            {props.children}
+            <div className="container mx-auto py-5">{props.children}</div>
         </DarkContainer>
     );
 }
