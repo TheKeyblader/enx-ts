@@ -1,7 +1,7 @@
 {
   "name": "create-app",
   "description": "Enx app template",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Jean-François Pustay <jef97310@gmail.com>",
   "scripts": {
     "build": "tsup src/cli.ts --minify",
