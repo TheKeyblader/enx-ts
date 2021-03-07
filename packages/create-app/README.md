@@ -1,4 +1,4 @@
-# Create App
+# Enx app
 
 Enx app template
 
@@ -7,5 +7,5 @@ Enx app template
 ## Use
 
 ```bash
-npx create-app <name>
+npm init @enx2/app <name>
 ```
