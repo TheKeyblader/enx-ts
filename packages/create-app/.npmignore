@@ -12,4 +12,4 @@ CVS
 npm-debug.log
 
 !templates/default/.gitignore
-!templates/default/node_modules
+templates/default/node_modules
