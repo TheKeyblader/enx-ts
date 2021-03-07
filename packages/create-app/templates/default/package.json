@@ -9,14 +9,18 @@
     "dependencies": {
         "@blueprintjs/core": "^3.40.0",
         "axios": "^0.21.1",
+        "classnames": "^2.2.6",
         "lodash": "^4.17.21",
         "mobx": "^6.1.8",
         "mobx-react-lite": "^3.2.0",
         "react": "^17.0.0",
-        "react-dom": "^17.0.0"
+        "react-dom": "^17.0.0",
+        "react-helmet-async": "^1.0.9",
+        "wouter": "^2.7.3"
     },
     "devDependencies": {
         "@tailwindcss/aspect-ratio": "^0.2.0",
+        "@types/classnames": "^2.2.11",
         "@types/lodash": "^4.14.168",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
