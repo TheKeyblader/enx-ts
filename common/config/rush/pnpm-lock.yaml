@@ -1,8 +1,9 @@
 dependencies:
   '@rush-temp/create-app': file:projects/create-app.tgz
+  '@rush-temp/odin': file:projects/odin.tgz
   create-initializer: 1.1.1
-  tsup: 3.12.1_typescript@4.2.3
-  typescript: 4.2.3
+  mobx: 6.1.8
+  reflect-metadata: 0.1.13
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.12.13:
@@ -1050,6 +1051,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  /mobx/6.1.8:
+    dev: false
+    resolution:
+      integrity: sha512-U4yCvUeh6yKXRwFxm2lyJjXPVekOEar/R8ZKWAXem/3fthJqYflViawfjDAUh7lZEvbKqljC3NT/pSaUKpE+gg==
   /mute-stream/0.0.8:
     dev: false
     resolution:
@@ -1255,6 +1260,10 @@ packages:
       node: '>=8.10.0'
     resolution:
       integrity: sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
+  /reflect-metadata/0.1.13:
+    dev: false
+    resolution:
+      integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
   /regenerator-runtime/0.11.1:
     dev: false
     resolution:
@@ -1558,6 +1567,29 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-W9/XQ7JTEt1iuybQLVk0eNKYBfuIbQ7uvVVyBg6xSEL0XrIdi8sWKj9W2wC8e9KRpXwtQtSZ1a4wnqQMQiIH3w==
+  /tsup/4.6.1_typescript@4.2.3:
+    dependencies:
+      '@rollup/plugin-node-resolve': 11.2.0_rollup@2.41.0
+      cac: 6.7.2
+      chalk: 4.1.0
+      chokidar: 3.5.1
+      esbuild: 0.8.57
+      globby: 11.0.2
+      joycon: 2.2.5
+      postcss-load-config: 3.0.1
+      resolve-from: 5.0.0
+      rollup: 2.41.0
+      sucrase: 3.17.1
+      typescript: 4.2.3
+    dev: false
+    hasBin: true
+    peerDependencies:
+      typescript: ^4.2.2
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    resolution:
+      integrity: sha512-I6WBrNqEdX2cUhr4Aj8TjAC6WKqMdtCyKDuiKgp4U09xnpjlbUbbaS7Y/AF5YNOX6BsISuF4J4hS0gM1qQieVQ==
   /type-fest/0.11.0:
     dev: false
     engines:
@@ -1677,8 +1709,22 @@ packages:
       integrity: sha512-LYUYfuE0fS/NtXO8CSdtdbQ6EqkfF2sOGCYAv8QNEqIJ1G1fXgskfyymxY7a4NXoXRSuzVC+6YIiGUp4DDypZw==
       tarball: file:projects/create-app.tgz
     version: 0.0.0
+  file:projects/odin.tgz:
+    dependencies:
+      mobx: 6.1.8
+      reflect-metadata: 0.1.13
+      tsup: 4.6.1_typescript@4.2.3
+      typescript: 4.2.3
+    dev: false
+    name: '@rush-temp/odin'
+    resolution:
+      integrity: sha512-+rjdxvywwFLJqf0apw8qfwAlmPaUPSYNMRkrE3nrTm2AnVmL55PW9caQq1IJkTimzc/+p0Fy/MXsG/nU7gb3Nw==
+      tarball: file:projects/odin.tgz
+    version: 0.0.0
+registry: ''
 specifiers:
   '@rush-temp/create-app': file:./projects/create-app.tgz
+  '@rush-temp/odin': file:./projects/odin.tgz
   create-initializer: ^1.0.0
-  tsup: ^3.6.1
-  typescript: ^4.0.2
+  mobx: ^6.1.8
+  reflect-metadata: ^0.1.13
