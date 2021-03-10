@@ -1,6 +1,7 @@
 dependencies:
   '@rush-temp/create-app': file:projects/create-app.tgz
   '@rush-temp/odin': file:projects/odin.tgz
+  '@types/node': 14.14.33
   create-initializer: 1.1.1
   mobx: 6.1.8
   reflect-metadata: 0.1.13
@@ -98,13 +99,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-/Ctrftx/zp4m8JOujM5ZhwzlWLx22nbQJiVqz8/zE15gOeEW+uly3FSX4fGFpcfEvFzXcMCJwq9lGVWgyARXhg==
+  /@types/node/14.14.33:
+    dev: false
+    resolution:
+      integrity: sha512-oJqcTrgPUF29oUP8AsUqbXGJNuPutsetaa9kTQAQce5Lx5dTYWV02ScBiT/k1BX/Z7pKeqedmvp39Wu4zR7N7g==
   /@types/parse-json/4.0.0:
     dev: false
     resolution:
       integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
   /@types/resolve/1.17.1:
     dependencies:
-      '@types/node': 14.14.32
+      '@types/node': 14.14.33
     dev: false
     resolution:
       integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==
@@ -394,6 +399,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+  /colorette/1.2.2:
+    dev: false
+    resolution:
+      integrity: sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
   /commander/4.1.1:
     dev: false
     engines:
@@ -1067,6 +1076,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==
+  /nanoid/3.1.20:
+    dev: false
+    engines:
+      node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1
+    hasBin: true
+    resolution:
+      integrity: sha512-a1cQNyczgKbLX9jwbS/+d7W8fX/RfgYR7lVWwWOGIPNgK2m0MWvrGF6/m4kk6U3QcFMnZf3RIhL0v2Jgh/0Uxw==
   /neo-async/2.6.2:
     dev: false
     resolution:
@@ -1248,6 +1264,16 @@ packages:
       node: '>= 10'
     resolution:
       integrity: sha512-/pDHe30UYZUD11IeG8GWx9lNtu1ToyTsZHnyy45B4Mrwr/Kb6NgYl7k753+05CJNKnjbwh4975amoPJ+TEjHNQ==
+  /postcss/8.2.8:
+    dependencies:
+      colorette: 1.2.2
+      nanoid: 3.1.20
+      source-map: 0.6.1
+    dev: false
+    engines:
+      node: ^10 || ^12 || >=14
+    resolution:
+      integrity: sha512-1F0Xb2T21xET7oQV9eKuctbM9S7BC0fetoHCc4H13z0PT6haiRLP4T0ZY4XWh7iLP0usgqykT6p9B2RtOf4FPw==
   /queue-microtask/1.2.2:
     dev: false
     resolution:
@@ -1624,6 +1650,20 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+  /vite/2.0.5:
+    dependencies:
+      esbuild: 0.8.57
+      postcss: 8.2.8
+      resolve: 1.20.0
+      rollup: 2.41.0
+    dev: false
+    engines:
+      node: '>=12.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    resolution:
+      integrity: sha512-QTgEDbq1WsTtr6j+++ewjhBFEk6c8v0xz4fb/OWJQKNYU8ZZtphOshwOqAlnarSstPBtWCBR0tsugXx6ajfoUg==
   /which-module/2.0.0:
     dev: false
     resolution:
@@ -1711,20 +1751,23 @@ packages:
     version: 0.0.0
   file:projects/odin.tgz:
     dependencies:
+      '@types/node': 14.14.33
       mobx: 6.1.8
       reflect-metadata: 0.1.13
       tsup: 4.6.1_typescript@4.2.3
       typescript: 4.2.3
+      vite: 2.0.5
     dev: false
     name: '@rush-temp/odin'
     resolution:
-      integrity: sha512-+rjdxvywwFLJqf0apw8qfwAlmPaUPSYNMRkrE3nrTm2AnVmL55PW9caQq1IJkTimzc/+p0Fy/MXsG/nU7gb3Nw==
+      integrity: sha512-iK8fdHmTBPueugphXFpFNvwHVcNNxZxVTLHPjtpmSiulqe9Wa2RcVEYSTQHpAP1y3dxJZEGZwLoJH0/bKhlDyw==
       tarball: file:projects/odin.tgz
     version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/create-app': file:./projects/create-app.tgz
   '@rush-temp/odin': file:./projects/odin.tgz
+  '@types/node': ^14.14.33
   create-initializer: ^1.0.0
   mobx: ^6.1.8
   reflect-metadata: ^0.1.13
