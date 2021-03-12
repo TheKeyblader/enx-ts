@@ -1,7 +1,7 @@
 {
     "name": "@enx2/odin",
-    "description": "Enx app template",
-    "version": "0.1.5",
+    "description": "",
+    "version": "0.1.0",
     "author": "Jean-François Pustay <jef97310@gmail.com>",
     "repository": {
         "type": "git",
@@ -16,14 +16,15 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "node build"
+        "build": "node build",
+        "build:watch": "node build"
     },
     "dependencies": {
         "mobx": "^6.1.8",
-        "reflect-metadata": "^0.1.13"
+        "reflect-metadata": "^0.1.13",
+        "utility-types": "^3.10.0"
     },
     "devDependencies": {
-        "@types/node": "^14.14.33",
         "tsup": "^4.6.1",
         "typescript": "^4.2.3"
     },

@@ -455,6 +455,10 @@
         {
             "packageName": "@enx2/odin",
             "projectFolder": "packages/odin"
+        },
+        {
+            "packageName": "@enx2/demo",
+            "projectFolder": "apps/demo"
         }
     ]
 }

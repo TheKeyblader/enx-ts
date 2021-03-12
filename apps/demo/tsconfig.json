@@ -1,0 +1,11 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "module": "ESNext",
+        "types": ["vite/client"],
+        "paths": {
+            "@enx2/odin": ["../../packages/odin/src"]
+        }
+    },
+    "include": ["./src"]
+}
