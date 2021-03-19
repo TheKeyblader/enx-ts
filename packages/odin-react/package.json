@@ -1,0 +1,37 @@
+{
+    "name": "@enx2/odin-react",
+    "description": "",
+    "version": "0.1.0",
+    "author": "Jean-François Pustay <jef97310@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TheKeyblader/enx-ts.git",
+        "directory": "packages/odin"
+    },
+    "homepage": "https://github.com/TheKeyblader/enx-ts/tree/main/packages/odin-react",
+    "bugs": {
+        "url": "https://github.com/TheKeyblader/enx-ts/issues"
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "node build",
+        "build:watch": "node build"
+    },
+    "dependencies": {
+        "react": "^17.0.1",
+        "mobx-react-lite": "^3.2.0",
+        "mobx": "^6.1.8",
+        "reflect-metadata": "^0.1.13",
+        "utility-types": "^3.10.0",
+        "@enx2/odin": "0.1.0"
+    },
+    "devDependencies": {
+        "@types/react": "17.0.3",
+        "tsup": "^4.6.1",
+        "typescript": "^4.2.3"
+    },
+    "type": "module",
+    "license": "MIT"
+}

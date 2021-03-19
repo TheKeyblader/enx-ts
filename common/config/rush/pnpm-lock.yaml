@@ -2,6 +2,7 @@ dependencies:
   '@rush-temp/create-app': file:projects/create-app.tgz
   '@rush-temp/demo': file:projects/demo.tgz
   '@rush-temp/odin': file:projects/odin.tgz
+  '@rush-temp/odin-react': file:projects/odin-react.tgz_react-dom@17.0.1
   '@types/react': 17.0.3
   '@types/react-dom': 17.0.2
   '@vitejs/plugin-react-refresh': 1.3.1
@@ -2163,6 +2164,24 @@ packages:
       integrity: sha512-LA4dOf8V35+kXiMVJPqKyfL2WkMhKfIwRr5a7vH3yeE3d+kaP9iOisMX/FuP2wDMRGsKiHgSn6JN2ShmbtOKuA==
       tarball: file:projects/demo.tgz
     version: 0.0.0
+  file:projects/odin-react.tgz_react-dom@17.0.1:
+    dependencies:
+      mobx: 6.1.8
+      mobx-react-lite: 3.2.0_5e7abdedacb0956a80bb8ef3f765fbc7
+      react: 17.0.1
+      reflect-metadata: 0.1.13
+      tsup: 4.6.1_typescript@4.2.3
+      typescript: 4.2.3
+      utility-types: 3.10.0
+    dev: false
+    id: file:projects/odin-react.tgz
+    name: '@rush-temp/odin-react'
+    peerDependencies:
+      react-dom: '*'
+    resolution:
+      integrity: sha512-61qJj5HO1xpRqMKPBXdOSuqIyuAwTukSU+iothSBAB5gnbkQ4abBwi7wMOdWJ54S2voNbgXFMP2qSS6UnNX4rw==
+      tarball: file:projects/odin-react.tgz
+    version: 0.0.0
   file:projects/odin.tgz:
     dependencies:
       '@types/node': 14.14.33
@@ -2183,6 +2202,7 @@ specifiers:
   '@rush-temp/create-app': file:./projects/create-app.tgz
   '@rush-temp/demo': file:./projects/demo.tgz
   '@rush-temp/odin': file:./projects/odin.tgz
+  '@rush-temp/odin-react': file:./projects/odin-react.tgz
   '@types/react': ^17.0.3
   '@types/react-dom': ^17.0.2
   '@vitejs/plugin-react-refresh': ^1.3.1
