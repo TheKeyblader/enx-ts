@@ -1,8 +1,6 @@
 dependencies:
   '@rush-temp/create-app': file:projects/create-app.tgz
   '@rush-temp/demo': file:projects/demo.tgz
-  '@rush-temp/odin': file:projects/odin.tgz
-  '@rush-temp/odin-react': file:projects/odin-react.tgz_react-dom@17.0.1
   '@types/react': 17.0.3
   '@types/react-dom': 17.0.2
   '@vitejs/plugin-react-refresh': 1.3.1
@@ -11,8 +9,7 @@ dependencies:
   mobx-react-lite: 3.2.0_5e7abdedacb0956a80bb8ef3f765fbc7
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
-  reflect-metadata: 0.1.13
-  utility-types: 3.10.0
+  tsup: 3.12.1
   vite: 2.0.5
 lockfileVersion: 5.2
 packages:
@@ -1650,10 +1647,6 @@ packages:
       node: '>=8.10.0'
     resolution:
       integrity: sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
-  /reflect-metadata/0.1.13:
-    dev: false
-    resolution:
-      integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
   /regenerator-runtime/0.11.1:
     dev: false
     resolution:
@@ -1707,6 +1700,18 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
+  /rollup-plugin-dts/2.0.1_rollup@2.41.0:
+    dependencies:
+      magic-string: 0.25.7
+      rollup: 2.41.0
+    dev: false
+    optionalDependencies:
+      '@babel/code-frame': 7.12.13
+    peerDependencies:
+      rollup: ^2.34.2
+      typescript: ^4.1.2
+    resolution:
+      integrity: sha512-y38NSXIY37YExCumbGBTL5dXg7pL7XD+Kbe98iEHWFN9yiKJf7t4kKBOkml5ylUDjQIXBnNClGDeRktc1T5dmA==
   /rollup-plugin-dts/2.0.1_rollup@2.41.0+typescript@4.2.3:
     dependencies:
       magic-string: 0.25.7
@@ -1965,6 +1970,24 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+  /tsup/3.12.1:
+    dependencies:
+      '@rollup/plugin-node-resolve': 11.2.0_rollup@2.41.0
+      cac: 6.7.2
+      chalk: 4.1.0
+      chokidar: 3.5.1
+      esbuild: 0.8.57
+      globby: 11.0.2
+      joycon: 2.2.5
+      postcss-load-config: 3.0.1
+      resolve-from: 5.0.0
+      rollup: 2.41.0
+      rollup-plugin-dts: 2.0.1_rollup@2.41.0
+      sucrase: 3.17.1
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-W9/XQ7JTEt1iuybQLVk0eNKYBfuIbQ7uvVVyBg6xSEL0XrIdi8sWKj9W2wC8e9KRpXwtQtSZ1a4wnqQMQiIH3w==
   /tsup/3.12.1_typescript@4.2.3:
     dependencies:
       '@rollup/plugin-node-resolve': 11.2.0_rollup@2.41.0
@@ -1985,29 +2008,6 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-W9/XQ7JTEt1iuybQLVk0eNKYBfuIbQ7uvVVyBg6xSEL0XrIdi8sWKj9W2wC8e9KRpXwtQtSZ1a4wnqQMQiIH3w==
-  /tsup/4.6.1_typescript@4.2.3:
-    dependencies:
-      '@rollup/plugin-node-resolve': 11.2.0_rollup@2.41.0
-      cac: 6.7.2
-      chalk: 4.1.0
-      chokidar: 3.5.1
-      esbuild: 0.8.57
-      globby: 11.0.2
-      joycon: 2.2.5
-      postcss-load-config: 3.0.1
-      resolve-from: 5.0.0
-      rollup: 2.41.0
-      sucrase: 3.17.1
-      typescript: 4.2.3
-    dev: false
-    hasBin: true
-    peerDependencies:
-      typescript: ^4.2.2
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    resolution:
-      integrity: sha512-I6WBrNqEdX2cUhr4Aj8TjAC6WKqMdtCyKDuiKgp4U09xnpjlbUbbaS7Y/AF5YNOX6BsISuF4J4hS0gM1qQieVQ==
   /type-fest/0.11.0:
     dev: false
     engines:
@@ -2037,12 +2037,6 @@ packages:
     optional: true
     resolution:
       integrity: sha512-TWYSWa9T2pPN4DIJYbU9oAjQx+5qdV5RUDxwARg8fmJZrD/V27Zj0JngW5xg1DFz42G0uDYl2XhzF6alSzD62w==
-  /utility-types/3.10.0:
-    dev: false
-    engines:
-      node: '>= 4'
-    resolution:
-      integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==
   /uuid/8.3.2:
     dev: false
     hasBin: true
@@ -2161,48 +2155,13 @@ packages:
     dev: false
     name: '@rush-temp/demo'
     resolution:
-      integrity: sha512-LA4dOf8V35+kXiMVJPqKyfL2WkMhKfIwRr5a7vH3yeE3d+kaP9iOisMX/FuP2wDMRGsKiHgSn6JN2ShmbtOKuA==
+      integrity: sha512-snt4fUdo6SEVMCh3n3G0Vbl8CBFVpi2MsyKVHZilPYv5Coxta767eSLWt4QSU1RZ8xW5xGhEnaaC+I18ocVKEQ==
       tarball: file:projects/demo.tgz
-    version: 0.0.0
-  file:projects/odin-react.tgz_react-dom@17.0.1:
-    dependencies:
-      mobx: 6.1.8
-      mobx-react-lite: 3.2.0_5e7abdedacb0956a80bb8ef3f765fbc7
-      react: 17.0.1
-      reflect-metadata: 0.1.13
-      tsup: 4.6.1_typescript@4.2.3
-      typescript: 4.2.3
-      utility-types: 3.10.0
-    dev: false
-    id: file:projects/odin-react.tgz
-    name: '@rush-temp/odin-react'
-    peerDependencies:
-      react-dom: '*'
-    resolution:
-      integrity: sha512-61qJj5HO1xpRqMKPBXdOSuqIyuAwTukSU+iothSBAB5gnbkQ4abBwi7wMOdWJ54S2voNbgXFMP2qSS6UnNX4rw==
-      tarball: file:projects/odin-react.tgz
-    version: 0.0.0
-  file:projects/odin.tgz:
-    dependencies:
-      '@types/node': 14.14.33
-      mobx: 6.1.8
-      reflect-metadata: 0.1.13
-      tsup: 4.6.1_typescript@4.2.3
-      typescript: 4.2.3
-      utility-types: 3.10.0
-      vite: 2.0.5
-    dev: false
-    name: '@rush-temp/odin'
-    resolution:
-      integrity: sha512-zIhS/TsHXx9dHV9XOM3fmWsD1tDyZOfZlowqjTK3qI29NaZhGR/0atZ+M7joPWRS8iYL5OfYKxJ7yAg+WsyF+w==
-      tarball: file:projects/odin.tgz
     version: 0.0.0
 registry: ''
 specifiers:
   '@rush-temp/create-app': file:./projects/create-app.tgz
   '@rush-temp/demo': file:./projects/demo.tgz
-  '@rush-temp/odin': file:./projects/odin.tgz
-  '@rush-temp/odin-react': file:./projects/odin-react.tgz
   '@types/react': ^17.0.3
   '@types/react-dom': ^17.0.2
   '@vitejs/plugin-react-refresh': ^1.3.1
@@ -2211,6 +2170,5 @@ specifiers:
   mobx-react-lite: ^3.2.0
   react: ^17.0.1
   react-dom: ^17.0.1
-  reflect-metadata: ^0.1.13
-  utility-types: ^3.10.0
+  tsup: ^3.6.1
   vite: ^2.0.5

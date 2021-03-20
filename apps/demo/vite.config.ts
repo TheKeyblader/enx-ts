@@ -8,9 +8,5 @@ export default defineConfig({
     define: {
         "process.env": {},
     },
-    resolve: {
-        alias: {
-            "@enx2/odin": resolve(__dirname, "../../packages/odin/src/index.ts"),
-        },
-    },
+    resolve: {},
 });
