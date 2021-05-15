@@ -10,7 +10,6 @@
         "**/node_modules": true
     },
     "files.associations": {
-        "*.json": "jsonc",
-        "package.json": "json"
+        "*.json": "jsonc"
     }
 }

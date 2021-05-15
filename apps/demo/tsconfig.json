@@ -1,8 +1,0 @@
-{
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "module": "ESNext",
-        "types": ["vite/client"]
-    },
-    "include": ["./src"]
-}
