@@ -63,3 +63,8 @@ common/deploy/
 common/temp/
 common/autoinstallers/*/.npmrc
 **/.rush/temp/
+
+# Vitejs
+dist
+dist-ssr
+*.local
