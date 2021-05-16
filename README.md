@@ -1,2 +1,3 @@
 # enx-ts
-Monorepo for my personnal libraries in typescript
+
+Monorepo for my libraries in typescript
