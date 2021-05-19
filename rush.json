@@ -455,6 +455,10 @@
         {
             "packageName": "@enx2/easy-react",
             "projectFolder": "packages/easy-react"
+        },
+        {
+            "packageName": "@enx2/sandbox",
+            "projectFolder": "apps/sandbox"
         }
     ]
 }

@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "@enx2/easy": ["../easy/src"]
+        }
+    },
+    "include": ["src"]
+}

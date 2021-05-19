@@ -4,11 +4,14 @@
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
+        "experimentalDecorators": true,
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
         "jsx": "react"
     }
 }
