@@ -1,9 +1,9 @@
 import { model, Model, prop, AnyModel, registerRootStore } from "mobx-keystone";
-import { Property, PropertyType } from "./property";
+import { Property } from "./property";
 
 @model("EnxEasy/Tree")
 export class Tree extends Model({
-    instance: prop<AnyModel>(),
+    instance: prop<AnyModel>().withSetter(),
     rootProperty: prop<Property>(
         () =>
             new Property({

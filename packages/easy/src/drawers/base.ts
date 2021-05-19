@@ -94,8 +94,8 @@ export abstract class GroupDrawer<O extends GroupOptions> extends DrawerBase<Pro
         super();
     }
 
-    get decorator() {
-        return this.property.options as O;
+    get decorators() {
+        return this.property.decorators as [PropertyKey, O][];
     }
 
     canDrawProperty(property: Property | PropertyGroup) {

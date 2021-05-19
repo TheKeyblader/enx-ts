@@ -1,9 +1,9 @@
 import { computed, get, IReactionDisposer, reaction } from "mobx";
-import { model, Model, prop, getRootStore, findParent, applySet, isModel, modelAction, AnyModel } from "mobx-keystone";
+import { model, Model, prop, findParent, applySet, isModel, modelAction, AnyModel, getRootStore } from "mobx-keystone";
 import { ownKeys } from "../core/utils";
 import { getGroupMetadata, GroupOptions } from "../decorators/group";
 import { $order, OrderOptions } from "../decorators/order";
-import { Tree } from "./tree";
+import type { Tree } from "./tree";
 
 export enum PropertyType {
     Value,
@@ -16,16 +16,17 @@ export class Property<T = any> extends Model({
     path: prop<PropertyKey>(),
     children: prop<(Property | PropertyGroup)[]>(() => []),
 }) {
+    private inited = false;
     private propertiesDisposer?: IReactionDisposer;
+    private root!: Tree;
+    private parent!: Property;
 
-    @computed
     get tree() {
-        return getRootStore<Tree>(this)!;
+        return this.root;
     }
 
-    @computed
     get parentProperty() {
-        return findParent<Property>(this, (p) => p instanceof Property)!;
+        return this.parent;
     }
 
     @computed
@@ -96,13 +97,21 @@ export class Property<T = any> extends Model({
     }
 
     onAttachedToRootStore() {
+        if (this.inited) throw new Error("Property is already inited");
+
+        this.root = getRootStore(this)!;
+        this.parent = findParent<Property>(this, (p) => p instanceof Property)!;
+
         const modelDisposer = reaction(
             () => isModel(this.value),
             (v) => this.observeModel(v),
             { fireImmediately: true }
         );
 
+        this.inited = true;
+
         return () => {
+            console.log("Disposed Property");
             modelDisposer();
             this.propertiesDisposer?.();
         };
@@ -124,19 +133,21 @@ export class Property<T = any> extends Model({
     private buildProperties(value: T) {
         if (isModel(value)) {
             const groupIds: string[] = [];
+            const children: (Property | PropertyGroup)[] = [];
             for (let key of ownKeys(value)) {
                 const group = getGroupMetadata(value, key);
                 if (!group) {
-                    this.children.push(new Property({ name: key.toString(), path: key }));
+                    children.push(new Property({ name: key.toString(), path: key }));
                 } else {
                     const groupId = group[1].groupId.split("/")[0];
                     const id = group[0].toString() + "-" + groupId;
                     if (!groupIds.includes(id)) {
-                        this.children.push(PropertyGroup.create(group[0], groupId));
+                        children.push(PropertyGroup.create(group[0], groupId));
                         groupIds.push(id);
                     }
                 }
             }
+            this.children = children;
         } else {
             this.children = [];
         }
@@ -153,6 +164,8 @@ export class PropertyGroup extends Model({
     children: prop<(Property | PropertyGroup)[]>(() => []),
 }) {
     readonly symbol!: symbol;
+    private inited = false;
+    private _host!: Property;
 
     @computed
     get name() {
@@ -161,7 +174,7 @@ export class PropertyGroup extends Model({
 
     @computed
     get host() {
-        return findParent<Property>(this, (p) => p instanceof Property)!;
+        return this._host;
     }
 
     @computed
@@ -176,12 +189,8 @@ export class PropertyGroup extends Model({
     }
 
     @computed
-    get options(): GroupOptions {
-        return Object.assign({}, ...this.decorators.map((d) => d[1]));
-    }
-
     get order() {
-        return this.options.order || 0;
+        return Math.max(...this.decorators.map((d) => d[1].order || 0));
     }
 
     @computed
@@ -208,8 +217,12 @@ export class PropertyGroup extends Model({
     }
 
     onAttachedToRootStore() {
+        if (this.inited) throw new Error("Property Group is already inited");
         if (!this.symbol) throw new Error("Create PropertyGroup with static create method please !");
 
+        this._host = findParent<Property>(this, (p) => p instanceof Property)!;
+
+        const groupIds: string[] = [];
         for (let key of ownKeys(this.host.value)) {
             if (typeof key === "number") throw new Error("Report to dev how you get this error");
 
@@ -219,7 +232,10 @@ export class PropertyGroup extends Model({
             if (group.groupId === this.groupId) {
                 this.children.push(new Property({ name: key.toString(), path: key }));
             } else {
-                this.children.push(PropertyGroup.create(this.symbol, group.groupId));
+                if (!groupIds.includes(group.groupId)) {
+                    this.children.push(PropertyGroup.create(this.symbol, group.groupId));
+                    groupIds.push(group.groupId);
+                }
             }
         }
     }

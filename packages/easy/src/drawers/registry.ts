@@ -17,7 +17,7 @@ export function registerDrawer(drawerType: DrawerConstructor<DrawerBase>, priori
     const id = getDrawerId(drawerType);
     if (registry.has(id))
         console.warn(
-            `a model with name "${drawerType.name}" already exists (if you are using hot-reloading you may safely ignore this warning)`
+            `a drawer with name "${drawerType.name}" already exists (if you are using hot-reloading you may safely ignore this warning)`
         );
     registry.set(id, { drawerType, priority, uninitializedDrawer: new drawerType() });
 }

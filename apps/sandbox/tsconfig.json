@@ -3,10 +3,9 @@
     "compilerOptions": {
         "module": "ESNext",
         "types": ["vite/client"],
-        "baseUrl": "src",
         "paths": {
-            "@enx2/easy-react": ["../../../packages/easy-react/src"],
-            "@enx2/easy": ["../../../packages/easy/src"]
+            "@enx2/easy-react": ["../../packages/easy-react/src"],
+            "@enx2/easy": ["../../packages/easy/src"]
         }
     },
     "include": ["src"]

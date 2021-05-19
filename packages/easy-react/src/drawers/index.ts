@@ -1,6 +1,7 @@
+export * from "./base";
+
 import "./string";
 import "./number";
 import "./object";
 import "./title";
-
-export * from "./base";
+import "./flex";

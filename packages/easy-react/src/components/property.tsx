@@ -1,5 +1,6 @@
 import { createDrawChain, DrawChain, drawChainEquals, Property, PropertyGroup, Tree } from "@enx2/easy";
-import { autorun, reaction } from "mobx";
+import { reaction } from "mobx";
+import { AnyModel } from "mobx-keystone";
 import React, { useEffect, useState } from "react";
 import { getDrawerComponent } from "../drawers";
 
@@ -13,8 +14,9 @@ export function DrawProperty({ property }: DrawerPropertyProps) {
         () =>
             reaction(() => createDrawChain(property), setChain, {
                 equals: drawChainEquals,
+                fireImmediately: true,
             }),
-        [property]
+        [property.$modelId]
     );
 
     return <DrawNextDrawer chain={chain} index={-1} />;
@@ -34,9 +36,11 @@ export function DrawNextDrawer({ chain, index }: DrawNextDrawerProps) {
 }
 
 export interface EasyProps {
-    tree: Tree;
+    instance: AnyModel;
 }
 
-export function Easy({ tree }: EasyProps) {
+export function Easy({ instance }: EasyProps) {
+    const [tree, setTree] = useState(() => Tree.create(instance));
+    if (tree.instance != instance) setTree(Tree.create(instance));
     return <DrawProperty property={tree.rootProperty} />;
 }
