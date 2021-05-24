@@ -1,14 +1,18 @@
 import { drawer, ValueDrawer } from "@enx2/easy";
-import { AnyModel, isModel } from "mobx-keystone";
+import { isObservableObject } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { ReactDrawerProps, registerDrawer } from ".";
 import { DrawProperty } from "../components/property";
 
+function is(obj: any): obj is object {
+    return isObservableObject(obj);
+}
+
 @drawer("easy-react/model")
-class ModelDrawer extends ValueDrawer<AnyModel> {
+class ModelDrawer extends ValueDrawer<object> {
     constructor() {
-        super(isModel);
+        super(is);
     }
 }
 
@@ -19,7 +23,7 @@ const ReactModelDrawer = observer(function ReactModelDrawer({ drawer }: ReactDra
                 .slice()
                 .sort((a, b) => a.order - b.order)
                 .map((p) => (
-                    <div key={p.$modelId}>
+                    <div key={p.id}>
                         <DrawProperty property={p} />
                     </div>
                 ))}

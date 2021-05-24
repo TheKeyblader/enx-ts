@@ -5,15 +5,15 @@ import {
     DrawerPriority,
     FlexOptions,
     GroupDrawer,
-    Property,
-    PropertyGroup,
+    FieldProperty,
+    GroupProperty,
 } from "@enx2/easy";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { DrawProperty } from "../components";
 import { ReactDrawerProps, registerDrawer } from "./base";
 
-@drawer("easy-react/number")
+@drawer("easy-react/flex")
 class FlexDrawer extends GroupDrawer<FlexOptions> {
     constructor() {
         super($flex);
@@ -21,10 +21,12 @@ class FlexDrawer extends GroupDrawer<FlexOptions> {
 }
 
 const ReactFlexDrawer = observer(function ReactFlexDrawer({ drawer }: ReactDrawerProps<FlexDrawer>) {
-    const mergedOpt = Object.assign({}, ...drawer.decorators.map((d) => d[1])) as FlexOptions;
+    var values: FlexOptions[] = [];
+    for (let value of drawer.decorators.values()) values.push(value);
+    const mergedOpt = Object.assign({}, ...values) as FlexOptions;
     const childOpt = Object.assign(
         {},
-        ...(drawer.property.children.filter((p) => p instanceof Property) as Property[]).map(
+        ...(drawer.property.children.filter((p) => p instanceof FieldProperty) as FieldProperty[]).map(
             (p) => p.decorators.get($nestedflex) as FlexOptions | undefined
         )
     ) as FlexOptions;
@@ -47,20 +49,18 @@ const ReactFlexDrawer = observer(function ReactFlexDrawer({ drawer }: ReactDrawe
                 .slice()
                 .sort((a, b) => a.order - b.order)
                 .map((p) => (
-                    <ReactFlexChild key={p.$modelId} property={p} />
+                    <ReactFlexChild key={p.id} property={p} />
                 ))}
         </div>
     );
 });
 
-type Unarray<T> = T extends Array<infer U> ? U : T;
-
 interface ReactFlexChildProps {
-    property: Property | PropertyGroup;
+    property: FieldProperty | GroupProperty;
 }
 
 const ReactFlexChild = observer(function ReactFlexChild({ property }: ReactFlexChildProps) {
-    if (property instanceof PropertyGroup) return <DrawProperty property={property} />;
+    if (property instanceof GroupProperty) return <DrawProperty property={property} />;
     const opt = property.decorators.get($flex) as FlexOptions;
     const style: React.CSSProperties = {
         order: opt.flexOrder,

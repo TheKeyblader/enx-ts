@@ -1,4 +1,3 @@
-import { Property } from "../models";
 import { createBaseDecorator } from "./base";
 
 export interface GroupOptions {
@@ -32,5 +31,3 @@ export function getGroupMetadata(target: object, propertyKey: PropertyKey): [sym
     if (found) return [found, Reflect.getMetadata(found, target, propertyKey) as GroupOptions];
     else return void 0;
 }
-
-export function buildPropertyGroups(prop: Property) {}

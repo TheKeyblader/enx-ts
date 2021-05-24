@@ -13,7 +13,6 @@
         "@enx2/easy": "0.1.0",
         "@enx2/easy-react": "0.1.0",
         "mobx": "^6.3.0",
-        "mobx-keystone": "^0.59.0",
         "tslib": "^2.2.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",

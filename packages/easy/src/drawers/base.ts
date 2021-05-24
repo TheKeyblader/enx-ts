@@ -1,5 +1,5 @@
 import { GroupOptions } from "../decorators";
-import { Property, PropertyGroup } from "../models";
+import { FieldProperty, GroupProperty } from "../models";
 
 export enum DrawerPriority {
     auto,
@@ -8,7 +8,7 @@ export enum DrawerPriority {
     super,
 }
 
-export abstract class DrawerBase<T extends Property | PropertyGroup = Property | PropertyGroup> {
+export abstract class DrawerBase<T extends FieldProperty | GroupProperty = FieldProperty | GroupProperty> {
     private _initialized = false;
     private _property!: T;
     readonly priority!: number;
@@ -34,27 +34,28 @@ export abstract class DrawerBase<T extends Property | PropertyGroup = Property |
 
     initialize() {}
 
-    canDrawProperty(property: Property | PropertyGroup) {
+    canDrawProperty(property: FieldProperty | GroupProperty) {
         return true;
     }
 }
 
-export abstract class ValueDrawer<K> extends DrawerBase<Property<K>> {
+export abstract class ValueDrawer<K> extends DrawerBase<FieldProperty<K>> {
     constructor(private _guardFunc: (obj: any) => obj is K) {
         super();
     }
 
-    canDrawProperty(property: Property | PropertyGroup) {
-        if (property instanceof Property && this._guardFunc(property.value)) return this.canDrawValueProperty(property);
+    canDrawProperty(property: FieldProperty | GroupProperty) {
+        if (property instanceof FieldProperty && this._guardFunc(property.value))
+            return this.canDrawValueProperty(property);
         return false;
     }
 
-    canDrawValueProperty(property: Property) {
+    canDrawValueProperty(property: FieldProperty) {
         return true;
     }
 }
 
-export abstract class DecoratorDrawer<O extends {}, K extends Property = Property> extends DrawerBase<K> {
+export abstract class DecoratorDrawer<O extends {}, K extends FieldProperty = FieldProperty> extends DrawerBase<K> {
     constructor(private _sym: symbol) {
         super();
     }
@@ -63,48 +64,47 @@ export abstract class DecoratorDrawer<O extends {}, K extends Property = Propert
         return this.property.decorators.get(this._sym) as O;
     }
 
-    canDrawProperty(property: Property | PropertyGroup) {
-        if (property instanceof Property && property.decorators.has(this._sym))
+    canDrawProperty(property: FieldProperty | FieldProperty) {
+        if (property instanceof FieldProperty && property.decorators.has(this._sym))
             return this.canDrawDecoratorProperty(property);
         return false;
     }
 
-    canDrawDecoratorProperty(property: Property) {
+    canDrawDecoratorProperty(property: FieldProperty) {
         return true;
     }
 }
 
-export abstract class DecoratorValueDrawer<O extends {}, K> extends DecoratorDrawer<O, Property<K>> {
+export abstract class DecoratorValueDrawer<O extends {}, K> extends DecoratorDrawer<O, FieldProperty<K>> {
     constructor(sym: symbol, private _guardFunc: (obj: any) => obj is K) {
         super(sym);
     }
 
-    canDrawDecoratorProperty(property: Property) {
+    canDrawDecoratorProperty(property: FieldProperty) {
         if (this._guardFunc(property.value)) return this.canDrawDecoratorValueProperty(property);
         return false;
     }
 
-    canDrawDecoratorValueProperty(property: Property) {
+    canDrawDecoratorValueProperty(property: FieldProperty) {
         return true;
     }
 }
 
-export abstract class GroupDrawer<O extends GroupOptions> extends DrawerBase<PropertyGroup> {
+export abstract class GroupDrawer<O extends GroupOptions> extends DrawerBase<GroupProperty> {
     constructor(private _sym: symbol) {
         super();
     }
 
     get decorators() {
-        return this.property.decorators as [PropertyKey, O][];
+        return this.property.decorators as Map<symbol, O>;
     }
 
-    canDrawProperty(property: Property | PropertyGroup) {
-        if (property instanceof PropertyGroup && property.symbol == this._sym)
-            return this.canDrawGroupProperty(property);
+    canDrawProperty(property: FieldProperty | GroupProperty) {
+        if (property instanceof GroupProperty && property.type == this._sym) return this.canDrawGroupProperty(property);
         return false;
     }
 
-    canDrawGroupProperty(property: PropertyGroup) {
+    canDrawGroupProperty(property: GroupProperty) {
         return true;
     }
 }

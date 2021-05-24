@@ -1,10 +1,10 @@
-import { Property, PropertyGroup, Tree } from "../models";
+import { FieldProperty, GroupProperty, Tree } from "../models";
 import { DrawerBase } from "./base";
 import { registry } from "./registry";
 
 export interface DrawChain {
-    property: Property | PropertyGroup;
-    drawers: DrawerBase<Property | PropertyGroup>[];
+    property: FieldProperty | GroupProperty;
+    drawers: DrawerBase<FieldProperty | GroupProperty>[];
 }
 
 export interface DeepDrawChain extends DrawChain {
@@ -12,7 +12,7 @@ export interface DeepDrawChain extends DrawChain {
 }
 
 export function createDeepDrawChain(tree: Tree) {
-    function walk(property: Property | PropertyGroup): DeepDrawChain {
+    function walk(property: FieldProperty | GroupProperty): DeepDrawChain {
         const drawers: DrawerBase[] = [];
         for (let [, entry] of registry) {
             if (entry.uninitializedDrawer.canDrawProperty(property)) {
@@ -30,7 +30,7 @@ export function createDeepDrawChain(tree: Tree) {
     return walk(tree.rootProperty);
 }
 
-export function createDrawChain(property: Property | PropertyGroup): DrawChain {
+export function createDrawChain(property: FieldProperty | GroupProperty): DrawChain {
     const drawers: DrawerBase[] = [];
     for (let [, entry] of registry) {
         if (entry.uninitializedDrawer.canDrawProperty(property)) {
@@ -46,7 +46,7 @@ export function createDrawChain(property: Property | PropertyGroup): DrawChain {
 }
 
 export function drawChainEquals(a: DrawChain, b: DrawChain) {
-    if (a.property.$modelId != b.property.$modelId) return false;
+    if (a.property != b.property) return false;
     if (a.drawers.length != b.drawers.length) return false;
 
     for (let i = 0; i < a.drawers.length; i++) {

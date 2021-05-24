@@ -12,7 +12,6 @@
     "dependencies": {
         "@enx2/easy": "0.1.0",
         "mobx": "^6.3.1",
-        "mobx-keystone": "^0.59.0",
         "mobx-react-lite": "^3.2.0",
         "tslib": "^2.2.0"
     },

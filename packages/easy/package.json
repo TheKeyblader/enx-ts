@@ -12,7 +12,6 @@
     },
     "dependencies": {
         "mobx": "^6.3.0",
-        "mobx-keystone": "^0.59.0",
         "reflect-metadata": "^0.1.13",
         "tslib": "^2.2.0"
     },

@@ -9,10 +9,10 @@ import { Easy } from "@enx2/easy-react";
 import { Person, User } from "./model";
 
 function App() {
-    const [instance, setInstance] = useState<Person | User>(() => new Person({}));
+    const [instance, setInstance] = useState<Person | User>(new Person());
 
     function click() {
-        setInstance(instance instanceof Person ? new User({}) : new Person({}));
+        setInstance(instance instanceof Person ? new User() : new Person());
     }
 
     return (
@@ -22,5 +22,7 @@ function App() {
         </div>
     );
 }
+
+console.log(new Person());
 
 ReactDOM.render(<App />, document.getElementById("root"));
