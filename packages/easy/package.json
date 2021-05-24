@@ -6,6 +6,25 @@
         "auto",
         "form"
     ],
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TheKeyblader/enx-ts.git"
+    },
+    "bugs": {
+        "url": "https://github.com/TheKeyblader/enx-ts/issues"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./distµ/index.d.ts",
     "scripts": {
         "build": "tsup",
         "test": "mocha --require ts-node/register 'test/**/*.ts'"
