@@ -98,4 +98,11 @@ export class GroupProperty extends Disposable {
     get groups(): FieldProperty[] {
         return this.children.filter((c) => c instanceof FieldProperty) as any;
     }
+
+    dispose() {
+        super.dispose();
+        for (let child of this.children) {
+            child.dispose();
+        }
+    }
 }

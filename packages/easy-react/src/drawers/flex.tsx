@@ -7,6 +7,7 @@ import {
     GroupDrawer,
     FieldProperty,
     GroupProperty,
+    SystemDrawerPriority,
 } from "@enx2/easy";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -76,4 +77,4 @@ const ReactFlexChild = observer(function ReactFlexChild({ property }: ReactFlexC
     );
 });
 
-registerDrawer(FlexDrawer, ReactFlexDrawer, DrawerPriority.attribute);
+registerDrawer(FlexDrawer, ReactFlexDrawer, SystemDrawerPriority.attribute as any);

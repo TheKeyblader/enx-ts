@@ -1,4 +1,4 @@
-import { $title, DecoratorDrawer, drawer, DrawerPriority, TitleOptions } from "@enx2/easy";
+import { $title, DecoratorDrawer, drawer, DrawerPriority, SystemDrawerPriority, TitleOptions } from "@enx2/easy";
 import React, { Fragment } from "react";
 import { ReactDrawerProps } from ".";
 import { DrawNextDrawer } from "../components";
@@ -23,4 +23,4 @@ function ReactTitleDrawer({ chain, drawer, index }: ReactDrawerProps<TitleDrawer
     );
 }
 
-registerDrawer(TitleDrawer, ReactTitleDrawer, DrawerPriority.attribute);
+registerDrawer(TitleDrawer, ReactTitleDrawer, SystemDrawerPriority.attribute as any);

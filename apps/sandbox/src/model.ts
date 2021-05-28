@@ -1,6 +1,6 @@
 import faker from "faker";
-import { computed, makeAutoObservable } from "mobx";
-import { flex, nestedFlex, order, title } from "@enx2/easy";
+import { action, computed, makeAutoObservable } from "mobx";
+import { flex, nestedFlex, title } from "@enx2/easy";
 
 @title("Person")
 export class Person {
@@ -13,6 +13,7 @@ export class Person {
     address = new Address();
 
     @flex({ groupId: "A", flexGrow: 1 })
+    @computed
     get fullName() {
         return this.firstName + " " + this.lastName;
     }
@@ -28,8 +29,28 @@ export class Address {
     zipCode = faker.address.zipCode();
     city = faker.address.city();
 
+    values = [1, 2, 3];
+
     constructor() {
         makeAutoObservable(this);
+
+        const add = action(() => {
+            this.values.push(this.values.length + 1);
+            if (this.values.length == 10) {
+                clearInterval(val);
+                val = setInterval(remove, 1000);
+            }
+        });
+
+        const remove = action(() => {
+            this.values.pop();
+            if (this.values.length == 0) {
+                clearInterval(val);
+                val = setInterval(add, 1000);
+            }
+        });
+
+        var val = setInterval(add, 1000);
     }
 }
 

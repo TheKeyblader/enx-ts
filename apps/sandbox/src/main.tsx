@@ -23,6 +23,4 @@ function App() {
     );
 }
 
-console.log(new Person());
-
 ReactDOM.render(<App />, document.getElementById("root"));

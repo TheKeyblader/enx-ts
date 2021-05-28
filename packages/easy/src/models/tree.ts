@@ -7,5 +7,8 @@ export class Tree<T extends {} = any> {
     constructor(instance: T) {
         this.instance = instance;
         this.rootProperty = new FieldProperty(this);
+        this.dispose = this.rootProperty.dispose.bind(this.rootProperty);
     }
+
+    dispose: () => void;
 }

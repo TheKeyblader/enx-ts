@@ -1,11 +1,15 @@
 import { IReactionDisposer } from "mobx";
 
 export class Disposable {
-    private isDisposed: boolean;
+    private _isDisposed: boolean;
     private readonly disposers: (IReactionDisposer | Disposable)[];
 
+    get isDisposed() {
+        return this._isDisposed;
+    }
+
     constructor() {
-        this.isDisposed = false;
+        this._isDisposed = false;
         this.disposers = [];
     }
 
@@ -15,11 +19,11 @@ export class Disposable {
     }
 
     dispose() {
-        if (this.isDisposed) throw new Error("This class instace is already disposed!");
+        if (this._isDisposed) throw new Error("This class instance is already disposed!");
         for (let disposer of this.disposers) {
             if (disposer instanceof Disposable) disposer.dispose();
             else disposer();
         }
-        this.isDisposed = true;
+        this._isDisposed = true;
     }
 }

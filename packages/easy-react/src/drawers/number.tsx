@@ -1,7 +1,7 @@
-import { ValueDrawer, drawer } from "@enx2/easy";
+import { ValueDrawer, drawer, SystemDrawerPriority } from "@enx2/easy";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { ReactDrawerProps, registerDrawer } from ".";
+import { ReactDrawerProps, registerDrawer } from "./base";
 
 function isNumber(obj: any): obj is number {
     return typeof obj === "number";
@@ -18,4 +18,4 @@ const ReactNumberDrawer = observer(function ReactNumberDrawer({ chain, drawer }:
     return <span>{drawer.property.value}</span>;
 });
 
-registerDrawer(NumberDrawer, ReactNumberDrawer);
+registerDrawer(NumberDrawer, ReactNumberDrawer, SystemDrawerPriority.auto as any);

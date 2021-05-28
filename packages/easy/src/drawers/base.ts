@@ -8,6 +8,13 @@ export enum DrawerPriority {
     super,
 }
 
+export enum SystemDrawerPriority {
+    auto = -0.5,
+    value = 0.5,
+    attribute = 1.5,
+    super = 2.5,
+}
+
 export abstract class DrawerBase<T extends FieldProperty | GroupProperty = FieldProperty | GroupProperty> {
     private _initialized = false;
     private _property!: T;

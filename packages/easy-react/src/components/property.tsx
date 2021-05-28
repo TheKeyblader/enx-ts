@@ -18,6 +18,15 @@ export function DrawProperty({ property }: DrawerPropertyProps) {
         [property]
     );
 
+    useEffect(
+        () => () => {
+            if (!property.isDisposed) {
+                property.dispose();
+            }
+        },
+        []
+    );
+
     return <DrawNextDrawer chain={chain} index={-1} />;
 }
 
@@ -41,6 +50,9 @@ export interface EasyProps {
 export function Easy({ instance }: EasyProps) {
     if (!isObservableObject(instance)) throw new Error("instance value mush be an observable object");
     const [tree, setTree] = useState(() => new Tree(instance));
-    if (tree.instance != instance) setTree(new Tree(instance));
+    if (tree.instance != instance) {
+        tree.dispose();
+        setTree(new Tree(instance));
+    }
     return <DrawProperty property={tree.rootProperty} />;
 }

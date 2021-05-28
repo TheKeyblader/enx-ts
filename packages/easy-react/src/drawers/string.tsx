@@ -1,4 +1,4 @@
-import { drawer, ValueDrawer } from "@enx2/easy";
+import { drawer, SystemDrawerPriority, ValueDrawer } from "@enx2/easy";
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { ReactDrawerProps, registerDrawer } from "./base";
@@ -18,4 +18,4 @@ const ReactStringDrawer = observer(function ReactStringDrawer({ chain, drawer }:
     return <span>{drawer.property.value}</span>;
 });
 
-registerDrawer(StringDrawer, ReactStringDrawer);
+registerDrawer(StringDrawer, ReactStringDrawer, SystemDrawerPriority.auto as any);

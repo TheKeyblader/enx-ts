@@ -1,8 +1,8 @@
-import { drawer, ValueDrawer } from "@enx2/easy";
+import { drawer, SystemDrawerPriority, ValueDrawer } from "@enx2/easy";
 import { isObservableObject } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { ReactDrawerProps, registerDrawer } from ".";
+import { ReactDrawerProps, registerDrawer } from "./base";
 import { DrawProperty } from "../components/property";
 
 function is(obj: any): obj is object {
@@ -31,4 +31,4 @@ const ReactModelDrawer = observer(function ReactModelDrawer({ drawer }: ReactDra
     );
 });
 
-registerDrawer(ModelDrawer, ReactModelDrawer);
+registerDrawer(ModelDrawer, ReactModelDrawer, SystemDrawerPriority.auto as any);
