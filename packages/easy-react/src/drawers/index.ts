@@ -7,3 +7,5 @@ import "./title";
 import "./flex";
 import "./hide";
 import "./array";
+import "./divGroup";
+import "./div";

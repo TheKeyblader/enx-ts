@@ -103,7 +103,7 @@ export abstract class GroupDrawer<O extends GroupOptions> extends DrawerBase<Gro
     }
 
     get decorators() {
-        return this.property.decorators as Map<symbol, O>;
+        return this.property.decorators as Map<PropertyKey, O>;
     }
 
     canDrawProperty(property: FieldProperty | GroupProperty) {

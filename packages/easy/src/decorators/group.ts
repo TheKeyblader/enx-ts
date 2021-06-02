@@ -4,7 +4,6 @@ export interface GroupOptions {
     groupId: string;
     groupName?: string;
     order?: number;
-    animate?: boolean;
 }
 
 export const groupDecoratorKeys = new Set<symbol>();

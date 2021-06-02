@@ -9,7 +9,7 @@ export class GroupProperty extends Disposable {
     readonly tree: Tree<any>;
     readonly parent?: FieldProperty | GroupProperty;
     @observable readonly children: IObservableArray<FieldProperty | GroupProperty>;
-    @observable readonly decorators: Map<symbol, GroupOptions>;
+    @observable readonly decorators: Map<PropertyKey, GroupOptions>;
 
     readonly id: string;
     readonly type: symbol;
