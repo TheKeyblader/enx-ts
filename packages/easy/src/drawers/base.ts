@@ -1,24 +1,18 @@
 import { GroupOptions } from "../decorators";
 import { FieldProperty, GroupProperty } from "../models";
 
-export enum DrawerPriority {
+export enum DrawerType {
     auto,
     value,
     attribute,
     super,
 }
 
-export enum SystemDrawerPriority {
-    auto = -0.5,
-    value = 0.5,
-    attribute = 1.5,
-    super = 2.5,
-}
-
 export abstract class DrawerBase<T extends FieldProperty | GroupProperty = FieldProperty | GroupProperty> {
     private _initialized = false;
     private _property!: T;
     readonly priority!: number;
+    readonly type!: DrawerType;
 
     get initialized() {
         return this._initialized;
@@ -63,16 +57,20 @@ export abstract class ValueDrawer<K> extends DrawerBase<FieldProperty<K>> {
 }
 
 export abstract class DecoratorDrawer<O extends {}, K extends FieldProperty = FieldProperty> extends DrawerBase<K> {
-    constructor(private _sym: symbol) {
+    constructor(private _name: string) {
         super();
     }
 
+    get decoratorName() {
+        return this._name;
+    }
+
     get decorator() {
-        return this.property.decorators.get(this._sym) as O;
+        return this.property.decorators.get(this._name) as O;
     }
 
     canDrawProperty(property: FieldProperty | FieldProperty) {
-        if (property instanceof FieldProperty && property.decorators.has(this._sym))
+        if (property instanceof FieldProperty && property.decorators.has(this._name))
             return this.canDrawDecoratorProperty(property);
         return false;
     }
@@ -83,7 +81,7 @@ export abstract class DecoratorDrawer<O extends {}, K extends FieldProperty = Fi
 }
 
 export abstract class DecoratorValueDrawer<O extends {}, K> extends DecoratorDrawer<O, FieldProperty<K>> {
-    constructor(sym: symbol, private _guardFunc: (obj: any) => obj is K) {
+    constructor(sym: string, private _guardFunc: (obj: any) => obj is K) {
         super(sym);
     }
 
@@ -98,7 +96,7 @@ export abstract class DecoratorValueDrawer<O extends {}, K> extends DecoratorDra
 }
 
 export abstract class GroupDrawer<O extends GroupOptions> extends DrawerBase<GroupProperty> {
-    constructor(private _sym: symbol) {
+    constructor(private _sym: string) {
         super();
     }
 

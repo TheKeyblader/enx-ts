@@ -2,7 +2,7 @@ import {
     DrawChain,
     DrawerBase,
     DrawerConstructor,
-    DrawerPriority,
+    DrawerType,
     getDrawerId,
     registerDrawer as _registerDrawer,
     unregisterDrawer as _unregisterDrawer,
@@ -21,9 +21,10 @@ const drawerMap = new Map<string, React.ComponentType<ReactDrawerProps<any>>>();
 export function registerDrawer<D extends DrawerBase>(
     drawerType: DrawerConstructor<D>,
     component: React.ComponentType<ReactDrawerProps<D>>,
-    priority = DrawerPriority.auto
+    type: DrawerType,
+    priority = 0
 ) {
-    _registerDrawer(drawerType, priority);
+    _registerDrawer(drawerType, type, priority);
     drawerMap.set(getDrawerId(drawerType), component);
 }
 

@@ -20,10 +20,11 @@ export class Disposable {
 
     dispose() {
         if (this._isDisposed) throw new Error("This class instance is already disposed!");
-        for (let disposer of this.disposers) {
-            if (disposer instanceof Disposable) disposer.dispose();
-            else disposer();
-        }
         this._isDisposed = true;
+        for (let disposer of this.disposers) {
+            if (disposer instanceof Disposable) {
+                if (!disposer.isDisposed) disposer.dispose();
+            } else disposer();
+        }
     }
 }

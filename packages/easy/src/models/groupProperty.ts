@@ -12,7 +12,7 @@ export class GroupProperty extends Disposable {
     @observable readonly decorators: Map<PropertyKey, GroupOptions>;
 
     readonly id: string;
-    readonly type: symbol;
+    readonly type: string;
 
     @computed
     get name() {
@@ -26,12 +26,12 @@ export class GroupProperty extends Disposable {
         return walk!;
     }
 
-    constructor(tree: Tree<any>, parent: FieldProperty | GroupProperty, groupType: symbol, groupId: string) {
+    constructor(tree: Tree<any>, parent: FieldProperty | GroupProperty, groupType: string, groupId: string) {
         super();
         this.tree = tree;
         this.parent = parent;
         this.children = [] as any;
-        this.decorators = new Map();
+        this.decorators = observable.map(void 0, { deep: false });
 
         this.id = groupId;
         this.type = groupType;

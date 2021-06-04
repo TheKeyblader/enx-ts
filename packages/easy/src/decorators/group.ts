@@ -6,7 +6,7 @@ export interface GroupOptions {
     order?: number;
 }
 
-export const groupDecoratorKeys = new Set<symbol>();
+export const groupDecoratorKeys = new Set<string>();
 
 export function createGroupDecorator<O extends GroupOptions>(name: string): ReturnType<createBaseDecorator<O>> {
     const tuple = createBaseDecorator<O>(name);
@@ -14,11 +14,11 @@ export function createGroupDecorator<O extends GroupOptions>(name: string): Retu
     return tuple;
 }
 
-export function getGroupMetadata(target: object, propertyKey: PropertyKey): [symbol, GroupOptions] | undefined {
+export function getGroupMetadata(target: object, propertyKey: PropertyKey): [string, GroupOptions] | undefined {
     if (typeof propertyKey === "number") throw new Error("Report to dev how you get this error");
 
     const keys = Reflect.getMetadataKeys(target, propertyKey);
-    let found: symbol | undefined;
+    let found: string | undefined;
 
     for (let key of keys) {
         if (groupDecoratorKeys.has(key)) {

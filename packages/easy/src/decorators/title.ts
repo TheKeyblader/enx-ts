@@ -3,7 +3,7 @@ export interface TitleOptions {
     subTitle?: string;
 }
 
-export const $title = Symbol("Title");
+export const $title = "Title";
 export function title(title: string, subTitle?: string) {
     return Reflect.metadata($title, { title, subTitle });
 }

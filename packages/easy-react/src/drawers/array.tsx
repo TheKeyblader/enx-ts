@@ -1,4 +1,4 @@
-import { drawer, SystemDrawerPriority, ValueDrawer } from "@enx2/easy";
+import { drawer, DrawerType, ValueDrawer } from "@enx2/easy";
 import { isObservableArray } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -28,4 +28,4 @@ const ReactArrayDrawer = observer(function ReactArrayDrawer({ chain, drawer }: R
     );
 });
 
-registerDrawer(ArrayDrawer, ReactArrayDrawer, SystemDrawerPriority.auto as any);
+registerDrawer(ArrayDrawer, ReactArrayDrawer, DrawerType.value, -1);

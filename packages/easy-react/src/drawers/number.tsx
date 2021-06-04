@@ -1,4 +1,4 @@
-import { ValueDrawer, drawer, SystemDrawerPriority } from "@enx2/easy";
+import { ValueDrawer, drawer, DrawerType } from "@enx2/easy";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { ReactDrawerProps, registerDrawer } from "./base";
@@ -14,8 +14,8 @@ class NumberDrawer extends ValueDrawer<number> {
     }
 }
 
-const ReactNumberDrawer = observer(function ReactNumberDrawer({ chain, drawer }: ReactDrawerProps<NumberDrawer>) {
+const ReactNumberDrawer = observer(function ReactNumberDrawer({ drawer }: ReactDrawerProps<NumberDrawer>) {
     return <span>{drawer.property.value}</span>;
 });
 
-registerDrawer(NumberDrawer, ReactNumberDrawer, SystemDrawerPriority.auto as any);
+registerDrawer(NumberDrawer, ReactNumberDrawer, DrawerType.value, -1);

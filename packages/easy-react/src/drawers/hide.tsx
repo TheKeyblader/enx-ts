@@ -1,4 +1,4 @@
-import { $hide, DecoratorDrawer, drawer, SystemDrawerPriority } from "@enx2/easy";
+import { $hide, DecoratorDrawer, drawer, DrawerType } from "@enx2/easy";
 import { registerDrawer } from "./base";
 
 @drawer("easy-react/hide")
@@ -12,4 +12,4 @@ function ReactHideDrawer() {
     return null;
 }
 
-registerDrawer(HideDrawer, ReactHideDrawer, SystemDrawerPriority.super as any);
+registerDrawer(HideDrawer, ReactHideDrawer, DrawerType.attribute, -1);

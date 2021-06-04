@@ -1,4 +1,4 @@
-import { drawer, SystemDrawerPriority, ValueDrawer } from "@enx2/easy";
+import { drawer, DrawerType, ValueDrawer } from "@enx2/easy";
 import { isObservableObject } from "mobx";
 import { observer } from "mobx-react-lite";
 import React from "react";
@@ -18,17 +18,15 @@ class ModelDrawer extends ValueDrawer<object> {
 
 const ReactModelDrawer = observer(function ReactModelDrawer({ drawer }: ReactDrawerProps<ModelDrawer>) {
     return (
-        <div>
+        <React.Fragment>
             {drawer.property.children
                 .slice()
                 .sort((a, b) => a.order - b.order)
                 .map((p) => (
-                    <div key={p.id}>
-                        <DrawProperty property={p} />
-                    </div>
+                    <DrawProperty key={p.id} property={p} />
                 ))}
-        </div>
+        </React.Fragment>
     );
 });
 
-registerDrawer(ModelDrawer, ReactModelDrawer, SystemDrawerPriority.auto as any);
+registerDrawer(ModelDrawer, ReactModelDrawer, DrawerType.value, -1);

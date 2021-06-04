@@ -1,4 +1,4 @@
-import { drawer, DrawerPriority, FieldProperty, GroupDrawer, SystemDrawerPriority } from "@enx2/easy";
+import { drawer, DrawerType, FieldProperty, GroupDrawer } from "@enx2/easy";
 import React from "react";
 import { $divGroup, DivGroupOptions } from "../decorators/divGroup";
 import merge from "lodash.merge";
@@ -25,4 +25,4 @@ function ReactDivGroupDrawer<K extends keyof JSX.IntrinsicElements>({ drawer }: 
     return React.createElement(tag, props, children);
 }
 
-registerDrawer(DivGroupDrawer, ReactDivGroupDrawer, SystemDrawerPriority.attribute as any);
+registerDrawer(DivGroupDrawer, ReactDivGroupDrawer, DrawerType.attribute, -1);

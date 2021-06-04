@@ -1,5 +1,5 @@
 import { FieldProperty, GroupProperty, Tree } from "../models";
-import { DrawerBase } from "./base";
+import { DecoratorDrawer, DrawerBase, DrawerType } from "./base";
 import { registry } from "./registry";
 
 export interface DrawChain {
@@ -14,16 +14,39 @@ export interface DeepDrawChain extends DrawChain {
 export function createDeepDrawChain(tree: Tree) {
     function walk(property: FieldProperty | GroupProperty): DeepDrawChain {
         const drawers: DrawerBase[] = [];
-        for (let [, entry] of registry) {
-            if (entry.uninitializedDrawer.canDrawProperty(property)) {
-                var drawer = new entry.drawerType();
-                //@ts-ignore
-                drawer.priority = entry.priority;
-                drawer.init(property);
-                drawers.push(drawer);
+        var entries = Array.from(registry.values());
+
+        function addDrawers(type: DrawerType) {
+            var filteredEntries = entries.filter((e) => e.type == type).sort((a, b) => a.priority - b.priority);
+            for (let entry of filteredEntries) {
+                if (entry.uninitializedDrawer.canDrawProperty(property)) {
+                    let drawer = new entry.constructor();
+                    //@ts-ignore
+                    drawer.priority = entry.priority;
+                    //@ts-ignore
+                    drawer.type = entry.type;
+                    drawer.init(property);
+                    drawers.push(drawer);
+                }
             }
         }
-        drawers.sort((a, b) => a.priority - b.priority);
+
+        // Super Type
+        addDrawers(DrawerType.super);
+
+        // Attribute Type
+        if (property instanceof FieldProperty) {
+            for (let [] of property.decorators) {
+                addDrawers(DrawerType.attribute);
+            }
+        } else addDrawers(DrawerType.attribute);
+
+        // Value Type
+        addDrawers(DrawerType.value);
+
+        //Auto Type
+        addDrawers(DrawerType.auto);
+
         const child = property.children.map(walk);
         return { property, drawers, child };
     }
@@ -32,16 +55,54 @@ export function createDeepDrawChain(tree: Tree) {
 
 export function createDrawChain(property: FieldProperty | GroupProperty): DrawChain {
     const drawers: DrawerBase[] = [];
-    for (let [, entry] of registry) {
-        if (entry.uninitializedDrawer.canDrawProperty(property)) {
-            var drawer = new entry.drawerType();
-            //@ts-ignore
-            drawer.priority = entry.priority;
-            drawer.init(property);
-            drawers.push(drawer);
+    var entries = Array.from(registry.values());
+
+    function addDrawers(type: DrawerType) {
+        var filteredEntries = entries.filter((e) => e.type == type).sort((a, b) => a.priority - b.priority);
+        for (let entry of filteredEntries) {
+            if (entry.uninitializedDrawer.canDrawProperty(property)) {
+                let drawer = new entry.constructor();
+                //@ts-ignore
+                drawer.priority = entry.priority;
+                //@ts-ignore
+                drawer.type = entry.type;
+                drawer.init(property);
+                drawers.push(drawer);
+            }
         }
     }
-    drawers.sort((a, b) => b.priority - a.priority);
+
+    // Super Type
+    addDrawers(DrawerType.super);
+
+    // Attribute Type
+    if (property instanceof FieldProperty) {
+        for (let [name] of property.decorators) {
+            var filtered = entries.filter(
+                (e) =>
+                    e.type == DrawerType.attribute &&
+                    e.uninitializedDrawer instanceof DecoratorDrawer &&
+                    name.startsWith(e.uninitializedDrawer.decoratorName)
+            );
+            for (let entry of filtered) {
+                if (entry.uninitializedDrawer.canDrawProperty(property)) {
+                    let drawer = new entry.constructor();
+                    //@ts-ignore
+                    drawer.priority = entry.priority;
+                    //@ts-ignore
+                    drawer.type = entry.type;
+                    drawer.init(property);
+                    drawers.push(drawer);
+                }
+            }
+        }
+    } else addDrawers(DrawerType.attribute);
+
+    // Value Type
+    addDrawers(DrawerType.value);
+
+    //Auto Type
+    addDrawers(DrawerType.auto);
     return { property, drawers };
 }
 

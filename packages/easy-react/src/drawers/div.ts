@@ -1,4 +1,4 @@
-import { drawer, DecoratorDrawer, SystemDrawerPriority } from "@enx2/easy";
+import { drawer, DecoratorDrawer, DrawerType } from "@enx2/easy";
 import React from "react";
 import { ReactDrawerProps, registerDrawer } from "./base";
 import { DrawNextDrawer } from "../components";
@@ -21,4 +21,4 @@ function ReactDivDrawer<K extends keyof JSX.IntrinsicElements>({
     return React.createElement(tag, props, React.createElement(DrawNextDrawer, { chain, index }));
 }
 
-registerDrawer(DivDrawer, ReactDivDrawer, SystemDrawerPriority.attribute as any);
+registerDrawer(DivDrawer, ReactDivDrawer, DrawerType.attribute, -1);

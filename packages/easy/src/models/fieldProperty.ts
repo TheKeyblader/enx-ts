@@ -42,7 +42,7 @@ export class FieldProperty<T = any> extends Disposable {
     readonly parent?: FieldProperty | GroupProperty;
     readonly path?: PropertyKey;
     @observable readonly children: IObservableArray<FieldProperty | GroupProperty>;
-    @observable readonly decorators: Map<symbol, {}>;
+    @observable readonly decorators: Map<string, {}>;
 
     observeDisposer?: Lambda;
 
@@ -64,7 +64,7 @@ export class FieldProperty<T = any> extends Disposable {
         this.path = path;
 
         this.children = [] as any;
-        this.decorators = new Map();
+        this.decorators = observable.map(void 0, { deep: false });
 
         makeObservable(this);
 
@@ -81,15 +81,15 @@ export class FieldProperty<T = any> extends Disposable {
         this.decorators.clear();
         if (typeof this.path === "number") return;
 
-        let arr: [symbol, {}][];
+        let arr: [string, {}][];
         if (this.path) {
             arr = Reflect.getMetadataKeys(this.parentField!.value, this.path).map((c) => [
-                c as symbol,
+                c as string,
                 Reflect.getMetadata(c, this.parentField!.value, this.path as any) as {},
             ]);
         } else {
             arr = Reflect.getMetadataKeys(this.value).map((c) => [
-                c as symbol,
+                c as string,
                 Reflect.getMetadata(c, this.value) as {},
             ]);
         }
@@ -99,7 +99,7 @@ export class FieldProperty<T = any> extends Disposable {
             arr = arr.concat(
                 //@ts-ignore
                 Reflect.getMetadataKeys(prototype.constructor).map((c) => [
-                    c as symbol,
+                    c as string,
                     //@ts-ignore
                     Reflect.getMetadata(c, prototype.constructor) as {},
                 ])
