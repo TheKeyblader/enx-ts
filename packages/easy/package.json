@@ -1,6 +1,6 @@
 {
     "name": "@enx2/easy",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "Create app from decorators",
     "keywords": [
         "auto",
@@ -24,7 +24,7 @@
     },
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
-    "types": "./distµ/index.d.ts",
+    "types": "./dist/index.d.ts",
     "scripts": {
         "build": "tsup",
         "test": "mocha --require ts-node/register 'test/**/*.ts'"
