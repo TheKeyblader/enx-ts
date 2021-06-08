@@ -31,8 +31,9 @@
     "dependencies": {
         "@enx2/easy": "0.3.0",
         "lodash.merge": "^4.6.2",
-        "mobx": "^6.3.1",
+        "mobx": "^6.3.2",
         "mobx-react-lite": "^3.2.0",
+        "reflect-metadata": "^0.1.13",
         "tslib": "^2.2.0"
     },
     "peerDependencies": {
@@ -40,11 +41,11 @@
         "react-dom": "^17"
     },
     "devDependencies": {
-        "@types/react": "^17.0.6",
-        "@types/react-dom": "^17.0.5",
+        "@types/react": "^17.0.9",
+        "@types/react-dom": "^17.0.6",
         "@types/lodash.merge": "^4.6.6",
-        "tsup": "^4.11.0",
-        "typescript": "^4.2.4"
+        "tsup": "^4.11.2",
+        "typescript": "^4.3.2"
     },
     "author": "Jean-François Pustay",
     "license": "MIT"
