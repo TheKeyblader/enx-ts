@@ -1,8 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@blueprintjs/core': ^3.44.2
-  '@blueprintjs/icons': ^3.26.0
+  '@blueprintjs/core': ^3.45.0
+  '@blueprintjs/icons': ^3.26.1
   '@rush-temp/easy': file:./projects/easy.tgz
   '@rush-temp/easy-react': file:./projects/easy-react.tgz
   '@rush-temp/sandbox': file:./projects/sandbox.tgz
@@ -29,6 +29,7 @@ specifiers:
   tsup: ^4.11.2
   vite: ^2.3.3
   vite-aliases: ^0.6.3
+  zod: ^3.1.0
 
 dependencies:
   '@blueprintjs/core': 3.45.0
@@ -59,6 +60,7 @@ dependencies:
   tsup: 4.11.2
   vite: 2.3.7
   vite-aliases: 0.6.3
+  zod: 3.1.0
 
 packages:
 
@@ -2424,6 +2426,10 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /zod/3.1.0:
+    resolution: {integrity: sha512-qS0an8oo9EvVLVqIVxMZrQrfR2pVwBtlPp+BzTB/F19IyPTRaLLoFfdXRzgh626pxFR1efuTWV8bPoEE58KwqA==}
+    dev: false
+
   file:projects/easy-react.tgz:
     resolution: {integrity: sha512-3N+ZBKIfMPeefR64S58/C+A1f+BBBrKk//Vv4uysd7dNQ9srUWGSTCygoO9Rm3z/ydNW101uvZefEGP3jqJqpA==, tarball: file:projects/easy-react.tgz}
     name: '@rush-temp/easy-react'
@@ -2447,7 +2453,7 @@ packages:
     dev: false
 
   file:projects/easy.tgz_@types+node@15.12.2:
-    resolution: {integrity: sha512-uymTPExMVDgSDdUVUbux2MJM4nCYueR0JJN8Ahn10iXKeJ1pKOHXMfmEkpSSuNOSvKIWx3MOnJUFrHsfcjxywQ==, tarball: file:projects/easy.tgz}
+    resolution: {integrity: sha512-ITyXSbu2Acy3AmaaUzDQwix5Tk86PLRR3os0BmdAwdanohcGwcNZDD4bOL5qZ6YmYxky3CsxSVEuqWNdVlTnQw==, tarball: file:projects/easy.tgz}
     id: file:projects/easy.tgz
     name: '@rush-temp/easy'
     version: 0.0.0
@@ -2463,6 +2469,7 @@ packages:
       tslib: 2.2.0
       tsup: 4.11.2_typescript@4.3.2
       typescript: 4.3.2
+      zod: 3.1.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -2471,7 +2478,7 @@ packages:
     dev: false
 
   file:projects/sandbox.tgz:
-    resolution: {integrity: sha512-9sudqlxvAssF83+Nd55oEtQBUyv88AJW6pT8ULh5QDJV8++Z1Mfs1kDhNrOpsUkNlbvfwKASN2mZkhORNLXHvw==, tarball: file:projects/sandbox.tgz}
+    resolution: {integrity: sha512-oDRouLKHVk4JbFy11e8fF6xAigJIUrzJ+a3qGoo26KTbr0UqAh2fCQybYy5DyN8xe/XEdA7L7BHsJTq0YveCDQ==, tarball: file:projects/sandbox.tgz}
     name: '@rush-temp/sandbox'
     version: 0.0.0
     dependencies:
@@ -2495,6 +2502,7 @@ packages:
       typescript: 4.3.2
       vite: 2.3.7
       vite-aliases: 0.6.3
+      zod: 3.1.0
     transitivePeerDependencies:
       - supports-color
     dev: false

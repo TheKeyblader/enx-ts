@@ -15,7 +15,18 @@ class StringDrawer extends ValueDrawer<string> {
 }
 
 const ReactStringDrawer = observer(function ReactStringDrawer({ drawer }: ReactDrawerProps<StringDrawer>) {
-    return React.createElement(React.Fragment, void 0, drawer.property.value);
+    if (drawer.tree.mode == "view") return React.createElement(React.Fragment, void 0, drawer.property.value);
+
+    function change(event: React.ChangeEvent<HTMLInputElement>) {
+        drawer.property.value = event.currentTarget.value;
+    }
+
+    return (
+        <span>
+            <input name={drawer.property.path!.toString()} onChange={change} value={drawer.property.value} />
+            {drawer.property.hasErrors && <div>{drawer.property.errorMessage}</div>}
+        </span>
+    );
 });
 
 registerDrawer(StringDrawer, ReactStringDrawer, DrawerType.value, -1);

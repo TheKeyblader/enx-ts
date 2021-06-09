@@ -22,6 +22,10 @@ export abstract class DrawerBase<T extends FieldProperty | GroupProperty = Field
         return this._property;
     }
 
+    get tree() {
+        return this.property.tree;
+    }
+
     init(property: T) {
         if (!this._initialized) {
             this._property = property;

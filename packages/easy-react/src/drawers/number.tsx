@@ -15,7 +15,23 @@ class NumberDrawer extends ValueDrawer<number> {
 }
 
 const ReactNumberDrawer = observer(function ReactNumberDrawer({ drawer }: ReactDrawerProps<NumberDrawer>) {
-    return <span>{drawer.property.value}</span>;
+    if (drawer.property.tree.mode == "view") return <span>{drawer.property.value}</span>;
+
+    function change(event: React.ChangeEvent<HTMLInputElement>) {
+        drawer.property.value = event.currentTarget.valueAsNumber || 0;
+    }
+
+    return (
+        <span>
+            <input
+                type="number"
+                name={drawer.property.path!.toString()}
+                onChange={change}
+                value={drawer.property.value}
+            />
+            {drawer.property.hasErrors && <div> {drawer.property.errorMessage}</div>}
+        </span>
+    );
 });
 
 registerDrawer(NumberDrawer, ReactNumberDrawer, DrawerType.value, -1);

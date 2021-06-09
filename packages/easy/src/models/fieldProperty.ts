@@ -2,7 +2,6 @@ import {
     action,
     computed,
     get,
-    IArrayDidChange,
     IObjectDidChange,
     IObservableArray,
     isObservableArray,
@@ -14,7 +13,9 @@ import {
     observable,
     observe,
     reaction,
+    set,
 } from "mobx";
+import { ZodError, ZodObject, ZodTypeAny } from "zod";
 import { ownKeys } from "../core/utils";
 import { $order, getGroupMetadata, OrderOptions } from "../decorators";
 import { Disposable } from "./disposable";
@@ -28,6 +29,16 @@ enum ObjectType {
     array,
     value,
 }
+
+type ZodSafeResult<T> =
+    | {
+          success: true;
+          data: T;
+      }
+    | {
+          success: false;
+          error: ZodError<T>;
+      };
 
 function getObjectType(obj: any): ObjectType {
     if (isObservableArray(obj)) return ObjectType.array;
@@ -211,6 +222,37 @@ export class FieldProperty<T = any> extends Disposable {
         if (!this.parentField) return this.tree.instance;
         return get(this.parentField.value, this.path!)!;
     }
+
+    set value(val) {
+        if (!this.parentField) throw new Error("Cannot set root property value !");
+        set(this.parentField.value, this.path!, val);
+    }
+
+    //#region Validation
+    @computed
+    get schema(): ZodTypeAny | undefined {
+        if (!this.parentField) return this.tree.schema;
+        if (this.parentField.schema && this.parentField.schema instanceof ZodObject) {
+            return this.parentField.schema.shape[this.path!];
+        }
+    }
+    @computed
+    get validationResult(): ZodSafeResult<T> | null {
+        if (this.tree.mode == "view" || !this.schema) return null;
+        return this.schema.safeParse(this.value);
+    }
+
+    @computed
+    get hasErrors() {
+        return this.validationResult?.success === false;
+    }
+
+    @computed
+    get errorMessage() {
+        if (this.validationResult == null || this.validationResult.success) return "";
+        return this.validationResult.error.format()._errors.join(",");
+    }
+    //#endregion
 
     dispose() {
         super.dispose();

@@ -82,7 +82,7 @@ export function createDrawChain(property: FieldProperty | GroupProperty): DrawCh
                 (e) =>
                     e.type == DrawerType.attribute &&
                     e.uninitializedDrawer instanceof DecoratorDrawer &&
-                    name.startsWith(e.uninitializedDrawer.decoratorName)
+                    name.split(":")[0] == e.uninitializedDrawer.decoratorName
             );
             for (let entry of filtered) {
                 if (entry.uninitializedDrawer.canDrawProperty(property)) {

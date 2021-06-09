@@ -1,5 +1,5 @@
 import { createDrawChain, DrawChain, drawChainEquals, FieldProperty, GroupProperty, Tree } from "@enx2/easy";
-import { isObservableObject, reaction } from "mobx";
+import { reaction } from "mobx";
 import React, { useEffect, useState } from "react";
 import { getDrawerComponent } from "../drawers";
 
@@ -43,16 +43,10 @@ export function DrawNextDrawer({ chain, index }: DrawNextDrawerProps) {
     return <Component chain={chain} index={index + 1} drawer={drawer} />;
 }
 
-export interface EasyProps {
-    instance: object;
+export interface EasyProps<T extends {}> {
+    tree: Tree<T>;
 }
 
-export function Easy({ instance }: EasyProps) {
-    if (!isObservableObject(instance)) throw new Error("instance value mush be an observable object");
-    const [tree, setTree] = useState(() => new Tree(instance));
-    if (tree.instance != instance) {
-        tree.dispose();
-        setTree(new Tree(instance));
-    }
+export function Easy<T extends {}>({ tree }: EasyProps<T>) {
     return <DrawProperty property={tree.rootProperty} />;
 }
