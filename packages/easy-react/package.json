@@ -29,7 +29,7 @@
         "build": "tsup"
     },
     "dependencies": {
-        "@enx2/easy": "0.3.0",
+        "@enx2/easy": "0.4.0",
         "lodash.merge": "^4.6.2",
         "mobx": "^6.3.2",
         "mobx-react-lite": "^3.2.0",

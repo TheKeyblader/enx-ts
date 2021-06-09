@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@blueprintjs/core': ^3.45.0
   '@blueprintjs/icons': ^3.26.1
+  '@enx2/easy': 0.3.0
   '@rush-temp/easy': file:./projects/easy.tgz
   '@rush-temp/easy-react': file:./projects/easy-react.tgz
   '@rush-temp/sandbox': file:./projects/sandbox.tgz
@@ -29,11 +30,11 @@ specifiers:
   tsup: ^4.11.2
   vite: ^2.3.3
   vite-aliases: ^0.6.3
-  zod: ^3.1.0
 
 dependencies:
   '@blueprintjs/core': 3.45.0
   '@blueprintjs/icons': 3.26.1
+  '@enx2/easy': 0.3.0
   '@rush-temp/easy': file:projects/easy.tgz_@types+node@15.12.2
   '@rush-temp/easy-react': file:projects/easy-react.tgz
   '@rush-temp/sandbox': file:projects/sandbox.tgz
@@ -60,7 +61,6 @@ dependencies:
   tsup: 4.11.2
   vite: 2.3.7
   vite-aliases: 0.6.3
-  zod: 3.1.0
 
 packages:
 
@@ -324,6 +324,31 @@ packages:
     dependencies:
       classnames: 2.3.1
       tslib: 1.13.0
+    dev: false
+
+  /@enx2/easy-react/0.3.0_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-ItOmdL0WlA5TJRLtDlV3HKWT+6mFTJcTXLKrUP900pbnZzq2tZt7bGrjkDS3MUEOnmBsMUZtCtozNeOjnnK5vA==}
+    peerDependencies:
+      react: ^17
+      react-dom: ^17
+    dependencies:
+      '@enx2/easy': 0.3.0
+      lodash.merge: 4.6.2
+      mobx: 6.3.2
+      mobx-react-lite: 3.2.0_7e8915efb8617305a7bfbed08f2cda09
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      tslib: 2.2.0
+    transitivePeerDependencies:
+      - react-native
+    dev: false
+
+  /@enx2/easy/0.3.0:
+    resolution: {integrity: sha512-1ATKN+OKVXmtgqzKJX78zU9gNp3pohJDkdVtljrifgk+y0ubTznG+prY8UoXVijuhTZxvrZke9wkI7u4Ex+1dA==}
+    dependencies:
+      mobx: 6.3.2
+      reflect-metadata: 0.1.13
+      tslib: 2.2.0
     dev: false
 
   /@fullhuman/postcss-purgecss/3.1.3:
@@ -2431,10 +2456,11 @@ packages:
     dev: false
 
   file:projects/easy-react.tgz:
-    resolution: {integrity: sha512-3N+ZBKIfMPeefR64S58/C+A1f+BBBrKk//Vv4uysd7dNQ9srUWGSTCygoO9Rm3z/ydNW101uvZefEGP3jqJqpA==, tarball: file:projects/easy-react.tgz}
+    resolution: {integrity: sha512-Q2b3LR6/AuMlH5SyY+shDZyWQnr3npdz+9LPOgC6Nn6GI7y0I2mhsxlC6iJfwzXWwCv8TaUitT5z2cs2vh5jtA==, tarball: file:projects/easy-react.tgz}
     name: '@rush-temp/easy-react'
     version: 0.0.0
     dependencies:
+      '@enx2/easy': 0.3.0
       '@types/lodash.merge': 4.6.6
       '@types/react': 17.0.9
       '@types/react-dom': 17.0.6
@@ -2453,7 +2479,7 @@ packages:
     dev: false
 
   file:projects/easy.tgz_@types+node@15.12.2:
-    resolution: {integrity: sha512-ITyXSbu2Acy3AmaaUzDQwix5Tk86PLRR3os0BmdAwdanohcGwcNZDD4bOL5qZ6YmYxky3CsxSVEuqWNdVlTnQw==, tarball: file:projects/easy.tgz}
+    resolution: {integrity: sha512-1MxMpV8R0LP7F+hi22T1/JBIguc/57jjhZWFOB/kTjb2Q+cGNaFNulOQbMTlYEWUEUZOKOo4YgdUf2t6ImDgKQ==, tarball: file:projects/easy.tgz}
     id: file:projects/easy.tgz
     name: '@rush-temp/easy'
     version: 0.0.0
@@ -2478,12 +2504,13 @@ packages:
     dev: false
 
   file:projects/sandbox.tgz:
-    resolution: {integrity: sha512-oDRouLKHVk4JbFy11e8fF6xAigJIUrzJ+a3qGoo26KTbr0UqAh2fCQybYy5DyN8xe/XEdA7L7BHsJTq0YveCDQ==, tarball: file:projects/sandbox.tgz}
+    resolution: {integrity: sha512-lrWAkvz4andEQCELW9K3oDRukoAnYSqyp1MlwidSidtMkLRFwUQgo6jHGxNHl5IPaALq3gSgC9KvUSqJL92eOQ==, tarball: file:projects/sandbox.tgz}
     name: '@rush-temp/sandbox'
     version: 0.0.0
     dependencies:
       '@blueprintjs/core': 3.45.0_react-dom@17.0.2+react@17.0.2
       '@blueprintjs/icons': 3.26.1
+      '@enx2/easy-react': 0.3.0_react-dom@17.0.2+react@17.0.2
       '@types/faker': 5.5.6
       '@types/node': 15.12.2
       '@types/react': 17.0.9
