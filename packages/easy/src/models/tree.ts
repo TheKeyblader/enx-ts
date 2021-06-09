@@ -1,7 +1,6 @@
 import { isObservableObject, makeObservable, observable } from "mobx";
+import { schemaOf } from "../core/utils";
 import { FieldProperty } from "./fieldProperty";
-import { schema } from "../core/utils";
-import { ZodObject } from "zod";
 
 export type TreeMode = "view" | "create" | "edit";
 
@@ -10,9 +9,9 @@ export class Tree<T extends {} = any> {
     readonly rootProperty: FieldProperty;
 
     @observable mode: TreeMode;
-    @observable schema?: ZodObject<schema<T>>;
+    @observable schema?: schemaOf<T>;
 
-    constructor(instance: T, mode: TreeMode = "view", schema?: ZodObject<schema<T>>) {
+    constructor(instance: T, mode: TreeMode = "view", schema?: schemaOf<T>) {
         if (!isObservableObject(instance)) throw new Error("instance value mush be an observable object");
         this.instance = instance;
         this.rootProperty = new FieldProperty(this);
@@ -26,7 +25,7 @@ export class Tree<T extends {} = any> {
         this.mode = newMode;
     }
 
-    setSchema(schema: ZodObject<schema<T>>) {
+    setSchema(schema: schemaOf<T>) {
         this.schema = schema;
     }
 

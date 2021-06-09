@@ -1,9 +1,10 @@
 import { isObservable, keys } from "mobx";
-import { ZodTypeAny } from "zod";
+import { ZodObject, ZodTypeAny } from "zod";
 
 export const ignoredKeys = ["constructor", "Symbol(mobx-stored-annotations)"];
 
-export type schema<T extends {}> = { [index in keyof T]: ZodTypeAny };
+export type schemaOf<T> = ZodObject<schema<T>>;
+type schema<T extends {}> = { [index in keyof T]: ZodTypeAny };
 
 function onlyUnique(value: any, index: number, self: any[]) {
     return self.indexOf(value) === index;
