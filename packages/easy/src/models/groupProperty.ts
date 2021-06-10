@@ -19,7 +19,6 @@ export class GroupProperty extends Disposable {
         return this.id;
     }
 
-    @computed
     get parentField() {
         let walk = this.parent;
         while (walk instanceof GroupProperty) walk = walk?.parent;

@@ -61,7 +61,6 @@ export class FieldProperty<T = any> extends Disposable {
         return this.path?.toString() || "";
     }
 
-    @computed
     get parentField() {
         let walk = this.parent;
         while (walk instanceof GroupProperty) walk = walk?.parent;
@@ -83,7 +82,10 @@ export class FieldProperty<T = any> extends Disposable {
         this.buildInitialProperties();
 
         this.addDisposer(
-            reaction(() => getObjectType(this.value), this.startObserve.bind(this), { fireImmediately: true })
+            reaction(() => getObjectType(this.value), this.startObserve.bind(this), {
+                fireImmediately: true,
+                name: "Reaction Object Type",
+            })
         );
     }
 
@@ -217,7 +219,7 @@ export class FieldProperty<T = any> extends Disposable {
         return 0;
     }
 
-    @computed
+    @computed({ name: "FieldProperty Value" })
     get value(): T {
         if (!this.parentField) return this.tree.instance;
         return get(this.parentField.value, this.path!)!;

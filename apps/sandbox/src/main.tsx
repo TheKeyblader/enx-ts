@@ -10,6 +10,16 @@ import { Card, CreateCard } from "./models/card";
 import { Tree, schemaOf } from "@enx2/easy";
 import { Callout } from "@blueprintjs/core";
 import { z } from "zod";
+import { configure } from "mobx";
+
+if (import.meta.env.DEV) {
+    configure({
+        enforceActions: "always",
+        computedRequiresReaction: true,
+        reactionRequiresObservable: true,
+        disableErrorBoundaries: true,
+    });
+}
 
 faker.locale = "fr";
 

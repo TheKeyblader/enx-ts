@@ -14,6 +14,7 @@ export function DrawProperty({ property }: DrawerPropertyProps) {
             reaction(() => createDrawChain(property), setChain, {
                 equals: drawChainEquals,
                 fireImmediately: true,
+                name: "Draw chain reaction",
             }),
         [property]
     );
