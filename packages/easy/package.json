@@ -1,6 +1,6 @@
 {
     "name": "@enx2/easy",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "Create app from decorators",
     "keywords": [
         "auto",
