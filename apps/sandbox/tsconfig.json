@@ -2,6 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "module": "ESNext",
+        "useDefineForClassFields": true,
         "types": ["vite/client"],
         "paths": {
             "@enx2/easy-react": ["../../packages/easy-react/src"],

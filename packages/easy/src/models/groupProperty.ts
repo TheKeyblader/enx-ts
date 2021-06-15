@@ -44,14 +44,11 @@ export class GroupProperty extends Disposable {
     @action
     private initDecorators() {
         this.decorators.clear();
-        const arr: [PropertyKey, GroupOptions][] = [];
         for (let prop of this.children) {
             if (prop instanceof FieldProperty) {
-                arr.push([prop.path!, prop.decorators.get(this.type) as GroupOptions]);
+                this.decorators.set(prop.path!, prop.decorators.get(this.type) as GroupOptions);
             }
         }
-
-        if (isObservableMap(this.decorators)) this.decorators.replace(arr);
     }
 
     @action

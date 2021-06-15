@@ -19,15 +19,6 @@ export function DrawProperty({ property }: DrawerPropertyProps) {
         [property]
     );
 
-    useEffect(
-        () => () => {
-            if (!property.isDisposed) {
-                property.dispose();
-            }
-        },
-        []
-    );
-
     return <DrawNextDrawer chain={chain} index={-1} />;
 }
 
@@ -49,5 +40,6 @@ export interface EasyProps<T extends {}> {
 }
 
 export function Easy<T extends {}>({ tree }: EasyProps<T>) {
+    useEffect(() => tree.dispose, []);
     return <DrawProperty property={tree.rootProperty} />;
 }

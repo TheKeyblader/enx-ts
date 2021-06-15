@@ -1,4 +1,4 @@
-import { isObservableObject, makeObservable, observable } from "mobx";
+import { isObservableObject, makeObservable, observable, computed } from "mobx";
 import { schemaOf } from "../core/utils";
 import { FieldProperty } from "./fieldProperty";
 
@@ -19,6 +19,14 @@ export class Tree<T extends {} = any> {
         this.schema = schema;
         this.dispose = this.rootProperty.dispose.bind(this.rootProperty);
         makeObservable(this);
+    }
+
+    @computed
+    get validationResult() {
+        if (!this.schema) throw new Error("No Schema set!");
+        const result = this.schema.safeParse(this.instance);
+        if (result.success) return null;
+        else return result.error;
     }
 
     setMode(newMode: TreeMode) {

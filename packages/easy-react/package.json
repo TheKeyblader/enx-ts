@@ -1,6 +1,6 @@
 {
     "name": "@enx2/easy-react",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "description": "Create app from decorators",
     "keywords": [
         "auto",
@@ -29,7 +29,7 @@
         "build": "tsup"
     },
     "dependencies": {
-        "@enx2/easy": "0.4.3",
+        "@enx2/easy": "0.4.4",
         "lodash.merge": "^4.6.2",
         "mobx": "^6.3.2",
         "mobx-react-lite": "^3.2.0",
@@ -45,7 +45,7 @@
         "@types/react-dom": "^17.0.6",
         "@types/lodash.merge": "^4.6.6",
         "tsup": "^4.11.2",
-        "typescript": "4.2.4"
+        "typescript": "^4.3.2"
     },
     "author": "Jean-François Pustay",
     "license": "MIT"

@@ -8,6 +8,9 @@ export default defineConfig({
     define: {
         "process.env": {},
     },
+    build: {
+        minify: false,
+    },
     resolve: {
         alias: {
             "@enx2/easy-react": resolve(__dirname, "../../packages/easy-react/src"),

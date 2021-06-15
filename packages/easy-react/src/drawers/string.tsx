@@ -24,7 +24,7 @@ const ReactStringDrawer = observer(function ReactStringDrawer({ drawer }: ReactD
     return (
         <span>
             <input name={drawer.property.path!.toString()} onChange={change} value={drawer.property.value} />
-            {drawer.property.hasErrors && <div>{drawer.property.errorMessage}</div>}
+            {drawer.property.message && <div>{drawer.property.message}</div>}
         </span>
     );
 });

@@ -1,7 +1,12 @@
-import { isObservable, keys } from "mobx";
+import { isObservableObject, keys, ownKeys as _ownKeys } from "mobx";
 import { ZodObject, ZodTypeAny } from "zod";
 
-export const ignoredKeys = ["constructor", "Symbol(mobx-stored-annotations)"];
+export const ignoredKeys = [
+    "constructor",
+    "Symbol(mobx-stored-annotations)",
+    "Symbol(mobx administration)",
+    "Symbol(mobx-keys)",
+];
 
 export type schemaOf<T> = ZodObject<schema<T>>;
 type schema<T extends {}> = { [index in keyof T]: ZodTypeAny };
@@ -14,7 +19,7 @@ export function ownKeys(obj: object) {
     const arr: PropertyKey[] = [];
     let walk: any = obj;
     while (walk != Object.prototype) {
-        var _keys = !isObservable(walk) ? Reflect.ownKeys(walk) : keys(walk);
+        var _keys: PropertyKey[] = !isObservableObject(walk) ? Reflect.ownKeys(walk) : _ownKeys(walk);
         for (let key of _keys) {
             if (!ignoredKeys.includes(key.toString())) arr.push(key);
         }

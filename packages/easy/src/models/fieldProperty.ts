@@ -21,6 +21,7 @@ import { $order, getGroupMetadata, OrderOptions } from "../decorators";
 import { Disposable } from "./disposable";
 import { GroupProperty } from "./groupProperty";
 import { Tree } from "./tree";
+import deepEqual from "fast-deep-equal";
 
 enum ObjectType {
     object,
@@ -52,6 +53,7 @@ export class FieldProperty<T = any> extends Disposable {
     readonly tree: Tree<any>;
     readonly parent?: FieldProperty | GroupProperty;
     readonly path?: PropertyKey;
+    readonly fullPath: PropertyKey[];
     @observable readonly children: IObservableArray<FieldProperty | GroupProperty>;
     @observable readonly decorators: Map<string, {}>;
 
@@ -72,6 +74,17 @@ export class FieldProperty<T = any> extends Disposable {
         this.tree = tree;
         this.parent = parent;
         this.path = path;
+        this.fullPath = [];
+
+        if (parent) {
+            var _parent: FieldProperty | undefined = this;
+            while (_parent) {
+                if (_parent.path) {
+                    this.fullPath.unshift(_parent.path);
+                    _parent = _parent.parentField;
+                } else _parent = void 0;
+            }
+        }
 
         this.children = [] as any;
         this.decorators = observable.map(void 0, { deep: false });
@@ -90,7 +103,7 @@ export class FieldProperty<T = any> extends Disposable {
     }
 
     @action
-    private initDecorators() {
+    public initDecorators() {
         this.decorators.clear();
         if (typeof this.path === "number") return;
 
@@ -232,27 +245,16 @@ export class FieldProperty<T = any> extends Disposable {
 
     //#region Validation
     @computed
-    get schema(): ZodTypeAny | undefined {
-        if (!this.parentField) return this.tree.schema;
-        if (this.parentField.schema && this.parentField.schema instanceof ZodObject) {
-            return this.parentField.schema.shape[this.path!];
+    get errors() {
+        if (this.tree.validationResult) {
+            return this.tree.validationResult.issues.filter((i) => deepEqual(i.path, this.fullPath));
         }
     }
-    @computed
-    get validationResult(): ZodSafeResult<T> | null {
-        if (this.tree.mode == "view" || !this.schema) return null;
-        return this.schema.safeParse(this.value);
-    }
 
-    @computed
-    get hasErrors() {
-        return this.validationResult?.success === false;
-    }
-
-    @computed
-    get errorMessage() {
-        if (this.validationResult == null || this.validationResult.success) return "";
-        return this.validationResult.error.format()._errors.join(",");
+    get message() {
+        if (this.errors) {
+            return this.errors.map((e) => e.message).join(",");
+        }
     }
     //#endregion
 
