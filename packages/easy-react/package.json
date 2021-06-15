@@ -1,6 +1,6 @@
 {
     "name": "@enx2/easy-react",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "description": "Create app from decorators",
     "keywords": [
         "auto",
@@ -29,7 +29,7 @@
         "build": "tsup"
     },
     "dependencies": {
-        "@enx2/easy": "0.4.4",
+        "@enx2/easy": "0.4.5",
         "lodash.merge": "^4.6.2",
         "mobx": "^6.3.2",
         "mobx-react-lite": "^3.2.0",
